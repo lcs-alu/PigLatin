@@ -6,34 +6,84 @@
 import Foundation
 
 // INPUT
-// Global variable, tracks how many words we can expect to have to translate to Pig Latin
-var countOfExpectedWordsToTranslate = 3
+var n = 0
 
-// Write a loop to actually collect the expected count of words to be translated from user
-// e.g.: write the rest of the INPUT section
+while 1 == 1 {
+    
+    // Ask for input
+    print("How many words will be provided?")
+    
+    //If it's nil
+    guard let givenNumberOfWords = readLine() else {
+        continue // Prompt again
+    }
+    
+    //If it's an integer
+    guard let integerNumberOfWords = Int(givenNumberOfWords) else {
+        continue // Prompt again
+    }
+    
+    //If it's more than 0, less than 10
+    if integerNumberOfWords < 0 || integerNumberOfWords > 10 {
+        continue // Prompt again
+    }
+    
+    //Here the input is valid
+    n = integerNumberOfWords
+    break // Stop prompting
+}
 
 
-// PROCESS & OUTPUT
-// Implement the primary logic of the problem here
-// Some output may be given here if you desire
 
 // Collect the words to be translated
-for counter in 1...countOfExpectedWordsToTranslate {
+for counter in 1...n {
     
     // Ask user for the word to be translated
     print("Enter word #\(counter):")
     
     // Create a variable that has the translated word
-    var translatedWord = ""
-    
-    // Get the input (use guard-let to guarantee it is not nil)
-    // and then print it out
-    guard let givenInput = readLine() else {
+    var translation = ""
+
+    // If it is nil
+    guard let input = readLine() else {
         // If someone enters nil input, just skip to the next line
         continue
     }
     
     // Replace this logic with the correct logic
-    translatedWord = givenInput
+    var vowelFound = false
+    var suffix = ""
+    var prefix = ""
+    for letter in input {
+        print(letter)
+        //Find the first vowel
+        if vowelFound == false {
+            switch letter {
+            case "A","E","I","O","U":
+                vowelFound = true
+            default:
+                vowelFound = false
+            }
+        }
+        print(vowelFound)
+        
+        // Decision: When we haven't found a vowel, add the letter to the suffix
+        //           When we have found a vowel, add the letter to the prefix
+        
+        if vowelFound == true {
+           prefix += String(letter)
+        } else {
+            suffix += String(letter)
+        }
+    
+    // Assemble the translated word
+    translation = prefix + suffix + "AY"
+        print(translation)
+    
+
     
 }
+
+
+}
+
